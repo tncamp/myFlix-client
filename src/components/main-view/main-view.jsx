@@ -1,45 +1,28 @@
 import React from "react";
+import axios from "axios";
+
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
-class MainView extends React.Component {
+export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [
-        {
-          _id: 1,
-          Title: "Howl's Moving Castle",
-          Description:
-            "description 1",
-          ImgPath:
-            "img 1",
-          Genre: "Anime",
-          Director: "director1",
-        },
-        {
-          _id: 2,
-          Title: "The Shawshank Redemption",
-          Description:
-            "description 2",
-          ImgPath:
-            "img 2",
-          Genre: "Drama",
-          Director: "director 2",
-        },
-        {
-          _id: 3,
-          Title: "Sprited Away",
-          Description:
-            "description 3",
-          ImgPath:
-            "img 3",
-          Genre: "Anime",
-          Director: "director 3",
-        },
-      ],
+      movies: [],
       selectedMovie: null,
-    };
+    }
+  }
+
+  componentDidMount() {
+    axios.get('https://taylorsflixdb.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   setSelectedMovie(newSelectedMovie) {
@@ -66,9 +49,9 @@ class MainView extends React.Component {
           movies.map((movie) => (
             <MovieCard
               key={movie._id}
-              movieData={movie}
-              onMovieClick={(movie) => {
-                this.setSelectedMovie(movie);
+              movie={movie}
+              onMovieClick={(newSelectedMovie) => {
+                this.setSelectedMovie(newSelectedMovie);
               }}
             />
           ))
