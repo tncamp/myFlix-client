@@ -1,0 +1,25 @@
+body {
+  box-sizing: border-box;
+}
+
+form {
+  display: block;
+  text-align: center;
+  width: 350px;
+  margin: auto;
+  margin-top: 15%;
+  padding: 1.5%;
+}
+
+label,
+.registerBtn {
+  display: block;
+  width: 200px;
+  margin: auto;
+  margin-top: 1%;
+}
+
+.registerBtn {
+  width: 100px;
+  margin-top: 2%;
+}
